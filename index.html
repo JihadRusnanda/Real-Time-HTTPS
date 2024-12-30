@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<body>
+<h2>
+    Real-Time Response:
+</h2>
+<p id ="resp">
+</p>
+
+<script>
+    var sse = new EventSource('/events');
+    var resp = document.getElementById('resp');
+
+    sse.onmessage = function (event) {
+        console.log(event.data);
+        resp.innerHTML += event.data + '<br>'
+    };
+
+    sse.onerror = function (e) {
+        setTimeout(() => (resp.innerHTML = ' '), 1000)
+    };
+
+</script>
+</body>
+</html>
